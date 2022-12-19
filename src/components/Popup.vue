@@ -3,7 +3,7 @@
     <div class="modal">
       <div v-if="open" class="overlay">
         <div class="container">
-          <p>Hello from the modal!</p>
+          <BurgerForm />
         </div>
         <button @click="open = false" class="close">&times;</button>
       </div>
@@ -15,8 +15,13 @@
 </template>
 
 <script>
+import BurgerForm from '../components/BurgerForm.vue'
+
 export default {
   name: 'Popup',
+  components: {
+    BurgerForm
+  },
   data() {
     return {
       open: false
@@ -39,7 +44,7 @@ export default {
     background: linear-gradient(to right, $bg 50%, $link 50%);
     background-size: 200% 100.5%;
     background-position: right bottom;
-    font-size:1rem;
+    font-size: 1rem;
     color: $h1;
     border: none;
     border-left: 0.20em solid $bg;
@@ -68,9 +73,13 @@ export default {
 
 
     .container {
-      background: red;
-      width: 300px;
-      height: 290px;
+      background: $text;
+      width: 450px;
+      height: auto;
+      margin: 0 auto;
+      margin-top: 1rem;
+      padding: 3rem;
+
     }
   }
 
@@ -84,7 +93,8 @@ export default {
     cursor: pointer;
     color: $link;
     background: $bg;
-    &:hover{
+
+    &:hover {
       filter: brightness(1);
     }
   }
