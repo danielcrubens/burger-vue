@@ -8,9 +8,7 @@ module.exports = {
       sass: {
         additionalData: `
         @import "@/assets/scss/_app.scss";
-        @import "@/assets/scss/_reset.scss";
-        @import "@/assets/scss/_normalize.scss";
-        
+        @import "@/assets/scss/_reset.scss";        
         `
       }
     }

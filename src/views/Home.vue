@@ -1,18 +1,20 @@
 <template>
-  <div class="main-container">
-<h1>Home</h1>
+  <div>
+    <Banner />
+    <Popup />
   </div>
 </template>
 
 <script>
+import Banner from '../components/Banner.vue'
+import Popup from '../components/Popup.vue'
 export default {
-  name:'Home'
+  name: 'Home',
+  components: {
+    Banner,
+    Popup
+  },
+
 }
 </script>
 
-
-<!-- <style lang="sass" scoped>
-h1{
-  color: red;
-  }
-</style> -->
