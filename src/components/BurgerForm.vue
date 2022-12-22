@@ -12,29 +12,21 @@
           <label for="pao">Escolha o pão:</label>
           <select name="pao" id="pao" v-model="pao">
             <option value="">Selecione seu pão</option>
-            <option value="integral">Integral</option>
+            <option v-for="pao in paes" :key="pao.id" value="pao.tipo">{{ pao.tipo }}</option>
           </select>
         </div>
         <div class="input-container">
           <label for="carne">Escolha o tipo de carne do seu Burger:</label>
           <select name="carne" id="carne" v-model="carne">
             <option value="">Selecione o tipo de carne</option>
-            <option value="maminha">Maminha</option>
+            <option v-for="carne in carnes" :key="carne.id" value="pao.tipo">{{ carne.tipo }}</option>
           </select>
         </div>
         <div id="opcionais-container" class="input-container">
           <label id="opcionais-title" for="opcionais">Selecione os opcionais:</label>
-          <div class="checkbox-container">
-            <input type="checkbox" name="opcionais" v-model="opcionais" value="salame">
-            <span>Salame</span>
-            <input type="checkbox" name="opcionais" v-model="opcionais" value="salame">
-            <span>Salame</span> <input type="checkbox" name="opcionais" v-model="opcionais" value="salame">
-            <span>Salame</span>
-            <input type="checkbox" name="opcionais" v-model="opcionais" value="salame">
-            <span>Salame</span>
-            <input type="checkbox" name="opcionais" v-model="opcionais" value="salame">
-            <span>Salame</span> <input type="checkbox" name="opcionais" v-model="opcionais" value="salame">
-            <span>Salame</span>
+          <div class="checkbox-container" v-for="opcional in opcionaisdata" :key="opcional.id">
+            <input type="checkbox" name="opcionais" v-model="opcionais" :value="opcional.tipo">
+            <span>{{ opcional.tipo }}</span>
           </div>
         </div>
         <input type="submit" class="submit-btn" value="Criar meu Burger">
@@ -45,15 +37,42 @@
 
 <script>
 export default {
-  name: 'BurgerForm'
+  name: 'BurgerForm',
+  data() {
+    return {
+      paes: null,
+      carnes: null,
+      opcionaisdata: null,
+      nome: null,
+      pao: null,
+      carne: null,
+      opcionais: [],
+      status: 'Solicitado',
+      msg: null
+    }
+  },
+  methods: {
+    async getIngredientes() {
+      const req = await fetch("http://localhost:3000/ingredientes")
+      const data = await req.json()
+      console.log(data)
+      this.paes = data.paes
+      this.carnes = data.carnes
+      this.opcionaisdata = data.opcionais
+    }
+  },
+  mounted() {
+    this.getIngredientes()
+  },
 }
 </script>
 
 <style lang="scss" scoped>
 #buger-form {
-  h1{
+  h1 {
     margin-bottom: 0.8rem;
   }
+
   .input-container {
     display: flex;
     flex-direction: column;
@@ -89,26 +108,19 @@ export default {
   }
 
   .checkbox-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 0.5rem 0.5rem;
-    justify-content: space-between;
-    align-content: end;
-    justify-items: start;
-    width: 100%;
-    margin-bottom: 1.25rem;
-
-    span,
-    input {
-      width: auto;
-    }
-
-    span {
-      margin-left: -4.5rem;
-      font-weight: bold;
-    }
-  }
+	display: flex;
+	align-items: flex-start;
+	width: 50%;
+	margin-bottom: 1.25rem;
+	span {
+		width: auto;
+		margin-left: 0.37rem;
+		font-weight: bold;
+	}
+	input {
+		width: auto;
+	}
+}
 
   .submit-btn {
     width: auto;
