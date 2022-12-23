@@ -1,9 +1,8 @@
 <template>
-  <div>
-    <p>Menssagem pedido</p>
+   
     <div>
       <form id="buger-form" @submit="createBurger">
-        <h1>Monte seu Burger</h1>
+        <Message :msg="msg" v-show="msg"/>
         <div class="input-container">
           <label for="nome">Nome do Cliente</label>
           <input type="text" id="nome" name="nome" v-model="nome" placeholder="Digite seu nome completo">
@@ -29,15 +28,19 @@
             <span>{{ opcional.tipo }}</span>
           </div>
         </div>
-        <input type="submit" class="submit-btn" value="Criar meu Burger">
+        <input :disabled="!nome || !pao||!carne " type="submit" value="Criar meu Burger">
       </form>
     </div>
-  </div>
+
 </template>
 
 <script>
+import Message from './Message.vue'
 export default {
   name: 'BurgerForm',
+  components: {
+    Message
+  },
   data() {
     return {
       paes: null,
@@ -47,7 +50,8 @@ export default {
       pao: null,
       carne: null,
       opcionais: [],
-      msg: null
+      msg: null,
+    
     }
   },
   methods: {
@@ -74,23 +78,30 @@ export default {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: dataJson
-      });
-      const res = await req.json()    
+      }); 
+      const res = await req.json()
+      console.log(res)
+      //colocar msg no sistema
+  this.msg = `Pedido N° ${res.id} realizado com sucesso!`
+      // limpar message
+      setTimeout(() => this.msg = "", 3600)
       // limpar campos
       this.nome = ""
       this.carne = ""
       this.pao = ""
       this.opcionais = []
 
-  }
-},
-mounted() {
-  this.getIngredientes()
-},
+    }
+  },
+  mounted() {
+    this.getIngredientes()
+  },
 }
 </script>
 
 <style lang="scss" scoped>
+$disable:#dddd;
+
 #buger-form {
   h1 {
     margin-bottom: 0.8rem;
@@ -147,7 +158,7 @@ mounted() {
     }
   }
 
-  .submit-btn {
+  input[type=submit] {
     width: auto;
     cursor: pointer;
     display: block;
@@ -162,7 +173,16 @@ mounted() {
     border-color: none;
     box-shadow: 0.188rem 0.188rem 0.125rem rgba(0, 0, 0, 0.2);
     transition: all .3s ease-out;
-
+    &:disabled{
+		background:$disable;
+		color:#bebebe;
+    border-left:none;
+		cursor: auto;
+    &:hover{
+      background:#cccc;
+      color:#bebebe;
+    }
+    }
     &:hover {
       background-position: left bottom;
       color: $text;

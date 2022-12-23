@@ -77,5 +77,32 @@
       "tipo": "Finalizado"
     }
   ],
-  "burgers": []
+  "burgers": [
+    {
+      "nome": "dan",
+      "carne": "pao.tipo",
+      "pao": "pao.tipo",
+      "opcionais": [
+        "Bacon"
+      ],
+      "status": "Solicitado",
+      "id": 1
+    },
+    {
+      "nome": null,
+      "carne": null,
+      "pao": null,
+      "opcionais": [],
+      "status": "Solicitado",
+      "id": 2
+    },
+    {
+      "nome": null,
+      "carne": "option1",
+      "pao": null,
+      "opcionais": [],
+      "status": "Solicitado",
+      "id": 3
+    }
+  ]
 }
