@@ -89,8 +89,8 @@ export default {
       });
       const res = await req.json()
       //msg
-      this.alert = `Status do pedido N° ${id} atualizado! `
-      setTimeout(() => window.location.reload(), 1500)
+      this.alert = `Status do pedido N° ${res.id} atualizado para ${res.status}! `
+      setTimeout(() => window.location.reload(), 1600)
 
       this.getPedidos()
 
