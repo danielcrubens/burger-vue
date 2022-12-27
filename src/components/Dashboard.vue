@@ -12,7 +12,7 @@
 
     <div id="burger-table-rows">
       <div class="burger-table-row" v-for="burger in burgers" :key="burger.id">
-        <div class="order-number">{{burger.id }}</div>
+        <div class="order-number">{{ burger.id }}</div>
         <div>{{ burger.nome }}</div>
         <div>{{ burger.pao }}</div>
         <div>{{ burger.carne }}</div>
@@ -24,6 +24,7 @@
         <div>
           <select name="status" class="status">
             <option value="">Selecione </option>
+            <option v-for="s in status" :key="s.id" value="s.tipo" :selected="burger.status == s.tipo">{{ s.tipo }}</option>
           </select>
           <button class="delete-btn">Cancelar</button>
         </div>
@@ -35,53 +36,62 @@
 <script>
 export default {
   name: 'Dashboard',
-  data(){
-    return{
-      burgers:null,
-      burger_id:null,
-      status:[]
+  data() {
+    return {
+      burgers: null,
+      burger_id: null,
+      status: []
     }
   },
-  methods:{
-    async getPedidos(){
+  methods: {
+    async getPedidos() {
       const req = await fetch('http://localhost:3000/burgers')
       const data = await req.json()
       this.burgers = data
       console.log(this.burgers)
 
       //resgatar os status
-
-
-    }
-  },
-  mounted() {
-    this.getPedidos()
-  },
+      this.getStatus()
+    },
+    async getStatus() {
+      const req = await fetch('http://localhost:3000/status')
+      const data = await req.json()
+      this.status = data
+      console.log(this.status)
+  }
+},
+mounted() {
+  this.getPedidos()
+},
 }
 </script>
 
 <style lang="scss" scoped>
 ::-webkit-scrollbar-track {
-    background-color: #F4F4F4;
+  background-color: #F4F4F4;
 }
+
 ::-webkit-scrollbar {
-    width: .4rem;
-    background: #F4F4F4;
+  width: .4rem;
+  background: #F4F4F4;
 }
+
 ::-webkit-scrollbar-thumb {
-    background: #dad7d7;
+  background: #dad7d7;
 }
- li{
+
+li {
   list-style: none;
- }
+}
+
 #burger-table {
   width: 1200px;
   margin: 0 auto;
   margin-top: 1.3rem;
-  max-height:330px;
+  max-height: 330px;
   overflow: scroll;
   overflow-x: hidden;
-  
+
 }
 
 #burger-table-heading {
@@ -90,9 +100,11 @@ export default {
   font-weight: bold;
   padding: 0.75rem;
   border-bottom: 0.18rem solid #333;
-  svg{
+
+  svg {
     color: $link;
   }
+
   div {
     width: 19%;
   }
@@ -101,7 +113,8 @@ export default {
     width: 5%;
 
   }
-  i{
+
+  i {
     color: red;
     background: pink;
   }
