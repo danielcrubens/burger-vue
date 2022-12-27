@@ -79,13 +79,15 @@
   ],
   "burgers": [
     {
-      "nome": "Dan",
-      "carne": "Maminha",
-      "pao": "Parmesão e Orégano",
+      "nome": "Daniel",
+      "carne": "Alcatra",
+      "pao": "3 Queijos",
       "opcionais": [
-        "Bacon"
+        "Bacon",
+        "Salame",
+        "Cebola roxa"
       ],
-      "status": "Em produção",
+      "status": "Finalizado",
       "id": 1
     }
   ]

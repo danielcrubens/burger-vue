@@ -29,5 +29,8 @@ $border:#f48fb1  ;
   max-width: 25rem;
   margin: 1.8rem auto;
   text-align: center;
+  position: absolute;
+  top: 7rem;
+  right: 5rem;
 }
 </style>
