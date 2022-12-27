@@ -1,5 +1,6 @@
 <template>
   <div id="burger-table">
+    <MessageDelete :msg="msg" v-show="msg"/>
 
     <div id="burger-table-heading">
       <div class="order-id">#</div>
@@ -26,7 +27,7 @@
             <option value="">Selecione </option>
             <option v-for="s in status" :key="s.id" value="s.tipo" :selected="burger.status == s.tipo">{{ s.tipo }}</option>
           </select>
-          <button class="delete-btn">Cancelar</button>
+          <button class="delete-btn" @click="deleteBurger(burger.id)">Cancelar</button>
         </div>
       </div>
     </div>
@@ -34,8 +35,12 @@
 </template>
 
 <script>
+import MessageDelete from './MessageDelete.vue'
 export default {
   name: 'Dashboard',
+  components:{
+    MessageDelete
+  },
   data() {
     return {
       burgers: null,
@@ -58,6 +63,17 @@ export default {
       const data = await req.json()
       this.status = data
       console.log(this.status)
+  },
+  async deleteBurger(id){
+    const req = await fetch(`http://localhost:3000/burgers/${id}`,{
+      method:'DELETE'
+    })
+    const res = await req.json()
+  //msg
+  this.msg = `Pedido N° ${id} apagado! `
+  setTimeout(() => window.location.reload(), 3600)
+  
+  this.getPedidos()
   }
 },
 mounted() {
