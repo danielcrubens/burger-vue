@@ -10,9 +10,14 @@ const routes = [
   {
     path: '/pedidos',
     name: 'Pedidos',
-   
-    component: () => import(/* webpackChunkName: "pedidos" */ '../views/Pedidos.vue')
-  }
+    component: () => import( '../views/Pedidos.vue')
+  },
+  {
+    path: "/:pathMatch(.*)*",
+    component: () => import( '../components/404.vue'),
+    meta: { is404: true }
+
+  },
 ]
 
 const router = createRouter({

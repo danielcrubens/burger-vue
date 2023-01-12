@@ -2,6 +2,8 @@
  <Navbar :logo="logo_src" :alt="app_name"/>
 
   <router-view/>
+  <router-view name="404" />
+
   <Footer />
 
 </template>

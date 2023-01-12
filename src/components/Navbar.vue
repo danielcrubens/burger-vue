@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav id="nav">
+    <nav id="nav" v-if="is404">
       <router-link to="/" id="logo-url">
         <img id="logo" :src="logo" :alt="alt"></router-link>
         <ul>
@@ -15,7 +15,12 @@
 
 export default {
   name: "Navbar",
-  props: ["logo", "alt"]
+  props: ["logo", "alt"],
+  computed:{
+    is404() {
+      return !this.$route.meta.is404;
+    }
+  }
 }
 </script>
 

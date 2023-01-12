@@ -1,6 +1,6 @@
 <template>
   <div>
-    <footer>
+    <footer v-if="is404">
       <p>Burger Vue &copy; {{currentYear}} </p>
     </footer>
   </div>
@@ -12,10 +12,14 @@ export default {
   computed: {
     currentYear() {
       return new Date().getFullYear();
+    },
+    is404() {
+      return !this.$route.meta.is404;
     }
   }
 }
 </script>
+
 
 <style lang="scss" scoped>
 footer {
