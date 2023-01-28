@@ -10,12 +10,18 @@ const routes = [
   {
     path: '/pedidos',
     name: 'Pedidos',
-    component: () => import( '../views/Pedidos.vue')
+    component: () => import('@/views/Pedidos.vue')
   },
   {
     path: "/:pathMatch(.*)*",
-    component: () => import( '../components/404.vue'),
+    component: () => import('@/components/404.vue'),
     meta: { is404: true }
+  },
+  {
+    path: "/entrar",
+    name: "SignIn",
+    component: () => import('@/views/SignIn.vue'),
+    meta: { isEntrar: true }
 
   },
 ]
