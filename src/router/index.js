@@ -17,13 +17,7 @@ const routes = [
     component: () => import('@/components/404.vue'),
     meta: { is404: true }
   },
-  {
-    path: "/entrar",
-    name: "SignIn",
-    component: () => import('@/views/SignIn.vue'),
-    meta: { isEntrar: true }
-
-  },
+  
 ]
 
 const router = createRouter({
