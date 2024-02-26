@@ -56,7 +56,7 @@ export default {
   },
   methods: {
     async getIngredientes() {
-      const req = await fetch("http://localhost:3000/ingredientes")
+      const req = await fetch("https://db-burger-vue.onrender.com/ingredientes")
       const data = await req.json()
       console.log(data)
       this.paes = data.paes
@@ -74,7 +74,7 @@ export default {
 
       }
       const dataJson = JSON.stringify(data)
-      const req = await fetch("http://localhost:3000/burgers", {
+      const req = await fetch("https://db-burger-vue.onrender.com/burgers", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: dataJson
